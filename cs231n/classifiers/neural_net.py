@@ -112,13 +112,14 @@ class TwoLayerNet(object):
 
         # we exponent the the scores to get the unnormalized log probabilities
         exp_scores = np.exp(scores)
-        # then we applt the normalizing technique 
+
+        # then we apply the normalizing technique (formula) 
         probs = exp_scores / np.sum(exp_scores, axis=1, keepdims=True)
         num_examples = X.shape[0]
         #we have the probs now and we need to query the log probabilities for each correct class
         correct_probs = -np.log(probs[range(num_examples), y])
 
-        # compute the loss: average cross-entropy loss and regularization
+        # compute the loss: average cross-entropy loss and regularization formulation
         data_loss = np.sum(correct_probs)/num_examples
         reg_loss = 0.5*reg*np.sum(W1*W1) +0.5*reg*np.sum(W2*W2)
         loss = data_loss + reg_loss
@@ -137,8 +138,8 @@ class TwoLayerNet(object):
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         
         # Now I need to Compute the Analytic Gradient with Backpropagation
-        # Since we have the loss value, we now need to use it to fine tune the parameters to reduce it
-        # We do so with something known as the gradient decent. 
+        # Since we have the loss value, we now need to use it to fine-tune the parameters to reduce it
+        # We do so with something known as the gradient descent.
         # This code bellow takes the probabilities of each class (presented as rows) 
         # and then applies the equation to get the gradient 
         # Essentially we are reversing the effects of transiting through the INPUT->HIDDEN->OUTPUT 
